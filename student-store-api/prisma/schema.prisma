@@ -17,14 +17,25 @@ model Product{
   id Int @id@default(autoincrement())
   name String
   description String
-  price Float
+  price Decimal
   image_url String
   category String
+  orderItems OrderItem[] 
 }
 model Order{
   id Int @id@default(autoincrement())
   customer String
-  total Float
+  total Decimal
   status String
   createdAt DateTime @default(now())
+  orderItems OrderItem[] 
+}
+model OrderItem{
+  id Int @id@default(autoincrement())
+  productId Int 
+  orderId Int
+  quantity Int 
+  price Decimal
+  order Order @relation(fields:[orderId], references:[id], onDelete: Cascade)
+  product Product @relation(fields:[productId], references:[id], onDelete: Cascade)
 }
