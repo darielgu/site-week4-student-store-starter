@@ -11,4 +11,8 @@ exports.createOrderItem = async (req, res) => {
   const { orderId, productId, price, quantity } = req.body;
   if (!orderId) return res.status(204).json({ error: "not available" });
   //   ! need to finish implementation for creating order
+  const newOrderItem = await prisma.OrderItem.create({
+    data: { orderId, productId, price, quantity },
+  });
+  res.status(201).json(newOrderItem);
 };

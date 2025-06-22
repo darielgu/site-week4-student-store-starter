@@ -32,3 +32,14 @@ exports.remove = async (req, res) => {
   await prisma.Order.delete({ where: { id } });
   res.status(204).end();
 };
+
+exports.getItems = async (req, res) => {
+  const id = Number(req.params.id);
+  const orderCart = await prisma.Order.findUnique({
+    where: { id },
+    include: { orderItems: true },
+  });
+  cartItems = orderCart.orderItems;
+  console.log(cartItems);
+  res.status(201).json(cartItems);
+};
