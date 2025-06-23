@@ -59,10 +59,10 @@ exports.total = async (req, res) => {
 exports.addCartItem = async (req, res) => {
   const orderId = Number(req.params.id);
   let { productId, price, quantity } = req.body;
-  console.log(req.body);
 
   if (!orderId) return res.status(204).json({ error: "not available" });
   // * going to make it that before we do this query we look for the item and see if it is already inside of the cart and add on our newly grabbed quantity to it
+  // if the orderId & productId are already in DB update
   const itemInCart = await prisma.orderItem.findFirst({
     where: {
       orderId: {
@@ -85,10 +85,10 @@ exports.addCartItem = async (req, res) => {
 
     res.status(201).json(updatedItem);
   } else {
+    // create newOrderItem
     const newOrderItem = await prisma.OrderItem.create({
       data: { orderId, productId, price, quantity },
     });
-
     res.status(201).json(newOrderItem);
   }
 };

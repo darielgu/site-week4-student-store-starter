@@ -6,22 +6,41 @@ import Sidebar from "../Sidebar/Sidebar";
 import Home from "../Home/Home";
 import ProductDetail from "../ProductDetail/ProductDetail";
 import NotFound from "../NotFound/NotFound";
-import { removeFromCart, addToCart, getQuantityOfItemInCart, getTotalItemsInCart } from "../../utils/cart";
+import {
+  removeFromCart,
+  addToCart,
+  getQuantityOfItemInCart,
+  getTotalItemsInCart,
+} from "../../utils/cart";
 import "./App.css";
 
 function App() {
-
   // State variables
+  const url = "http://localhost:3000/"; // TODO change to env variable
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All Categories");
   const [searchInputValue, setSearchInputValue] = useState("");
-  const [userInfo, setUserInfo] = useState({ name: "", dorm_number: ""});
+  const [userInfo, setUserInfo] = useState({ name: "", dorm_number: "" });
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
   const [isFetching, setIsFetching] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [error, setError] = useState(null);
   const [order, setOrder] = useState(null);
+
+  // Axios Call to populate products
+  useEffect(() => {
+    async function getProducts() {
+      try {
+        const response = await axios.get(url + "items/");
+        const recievedItems = response.data;
+        setProducts(recievedItems);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getProducts();
+  }, []);
 
   // Toggles sidebar
   const toggleSidebar = () => setSidebarOpen((isOpen) => !isOpen);
@@ -36,9 +55,7 @@ function App() {
     setSearchInputValue(event.target.value);
   };
 
-  const handleOnCheckout = async () => {
-  }
-
+  const handleOnCheckout = async () => {};
 
   return (
     <div className="App">
@@ -116,4 +133,3 @@ function App() {
 }
 
 export default App;
- 
