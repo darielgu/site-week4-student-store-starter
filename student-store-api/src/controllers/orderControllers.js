@@ -43,3 +43,28 @@ exports.getItems = async (req, res) => {
   console.log(cartItems);
   res.status(201).json(cartItems);
 };
+exports.total = async (req, res) => {
+  const id = Number(req.params.id);
+  const orderCart = await prisma.Order.findUnique({
+    where: { id },
+    include: { orderItems: true },
+  });
+  cartItems = orderCart.orderItems;
+  let cartTotal = 0;
+  cartItems.map((item, index) => {
+    cartTotal += parseFloat(item.price) * item.quantity;
+  });
+  res.status(201).json(cartTotal);
+};
+exports.addCartItem = async (req, res) => {
+  const orderId = Number(req.params.id);
+  const { productId, price, quantity } = req.body;
+  console.log(req.body);
+
+  // ! implemented by creating an object through prisma.OrderItem and filling in the ID of the related cart
+  if (!orderId) return res.status(204).json({ error: "not available" });
+  const newOrderItem = await prisma.OrderItem.create({
+    data: { orderId, productId, price, quantity },
+  });
+  res.status(201).json(newOrderItem);
+};
