@@ -4,7 +4,15 @@ const app = express();
 const itemRoutes = require("./routes/itemRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const orderItemRoutes = require("./routes/orderItemRoutes");
+const cors = require("cors");
+const morgan = require("morgan"); // verboses requests
 
+const corsOption = {
+  orgin: "http://localhost:5173/", // on deployment change to live server
+};
+
+app.use(morgan("dev"));
+app.use(cors());
 app.use(express.json());
 app.use("/items", itemRoutes);
 app.use("/orders", orderRoutes);

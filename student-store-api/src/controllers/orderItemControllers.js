@@ -11,8 +11,14 @@ exports.createOrderItem = async (req, res) => {
   const { orderId, productId, price, quantity } = req.body;
   if (!orderId) return res.status(204).json({ error: "not available" });
   //   ! need to finish implementation for creating order
+  // *  need to make it that you can add to the quantity and not a whole new item if already inside
   const newOrderItem = await prisma.OrderItem.create({
     data: { orderId, productId, price, quantity },
   });
   res.status(201).json(newOrderItem);
+};
+exports.deleteItem = async (req, res) => {
+  const id = parseInt(req.params.id);
+  await prisma.OrderItem.delete({ where: { id } });
+  res.status(204).end();
 };
