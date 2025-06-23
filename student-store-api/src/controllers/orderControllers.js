@@ -16,7 +16,7 @@ exports.create = async (req, res) => {
   const newOrder = await prisma.Order.create({
     data: { customer, total, status },
   });
-  res.status(201).json(newItem);
+  res.status(201).json(newOrder);
 };
 exports.update = async (req, res) => {
   const id = parseInt(req.params.id);
@@ -25,7 +25,7 @@ exports.update = async (req, res) => {
     where: { id },
     data: { customer, total, status },
   });
-  res.json();
+  res.status(201).json(order);
 };
 exports.remove = async (req, res) => {
   const id = Number(req.params.id);
@@ -54,13 +54,17 @@ exports.total = async (req, res) => {
   cartItems.map((item, index) => {
     cartTotal += parseFloat(item.price) * item.quantity;
   });
+  taxTotal = cartTotal * 0.0875;
+  cartTotal += taxTotal;
   res.status(201).json(cartTotal);
 };
 exports.addCartItem = async (req, res) => {
   const orderId = Number(req.params.id);
+  const id = Number(req.params.id);
   let { productId, price, quantity } = req.body;
 
   if (!orderId) return res.status(204).json({ error: "not available" });
+
   // * going to make it that before we do this query we look for the item and see if it is already inside of the cart and add on our newly grabbed quantity to it
   // if the orderId & productId are already in DB update
   const itemInCart = await prisma.orderItem.findFirst({

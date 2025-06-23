@@ -7,6 +7,10 @@ import Home from "../Home/Home";
 import ProductDetail from "../ProductDetail/ProductDetail";
 import NotFound from "../NotFound/NotFound";
 import {
+  calculateTaxesAndFees,
+  calculateTotal,
+} from "../../utils/calculations";
+import {
   removeFromCart,
   addToCart,
   getQuantityOfItemInCart,
@@ -32,8 +36,10 @@ function App() {
   useEffect(() => {
     async function getProducts() {
       try {
+        setIsFetching(true);
         const response = await axios.get(url + "items/");
         const recievedItems = response.data;
+        setIsFetching(false);
         setProducts(recievedItems);
       } catch (error) {
         console.log(error);
@@ -55,7 +61,55 @@ function App() {
     setSearchInputValue(event.target.value);
   };
 
-  const handleOnCheckout = async () => {};
+  const handleOnCheckout = async () => {
+    // create an order (cart)
+    try {
+      setIsCheckingOut(true);
+      const order = await axios.post(url + "orders/", {
+        customer: userInfo.name,
+        total: 0,
+        status: "ordering",
+      });
+      const itemId_Quantity = Object.entries(cart);
+
+      // for each loop starts here;
+      await Promise.all(
+        // Was having a race condition
+        itemId_Quantity.map(async ([id, quantity]) => {
+          // *  making another axios request here to grab the item price
+
+          const response = await axios.get(url + `items/${id}`);
+          let price = response.data.price; // we should have the price here for each itemn
+          console.log(price);
+
+          // * I am trying to get into our order id and create a new item sending in the id of the item
+          await axios.post(url + `orders/${order.data.id}/items`, {
+            orderId: order.data.id,
+            productId: parseInt(id),
+            price: price,
+            quantity: quantity,
+          });
+        })
+      );
+      // Grabbing total amount and updating order
+      const returnTotal = await axios.get(
+        url + `orders/${order.data.id}/total`
+      );
+      const finalTotal = returnTotal.data.toFixed(2);
+      await axios.put(url + `orders/${order.data.id}`, {
+        total: finalTotal,
+        status: "completed",
+      });
+      setIsCheckingOut(false);
+    } catch (error) {
+      console.error(error);
+      setIsCheckingOut(false);
+    }
+  };
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
 
   return (
     <div className="App">

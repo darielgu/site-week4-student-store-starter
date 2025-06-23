@@ -28,7 +28,7 @@ function ProductDetail({ addToCart, removeFromCart, getQuantityOfItemInCart }) {
       }
     }
     getSingleProduct();
-  }, []);
+  }, [productId]);
 
   if (error) {
     return <NotFound />;
