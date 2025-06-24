@@ -80,7 +80,6 @@ function App() {
 
           const response = await axios.get(url + `items/${id}`);
           let price = response.data.price; // we should have the price here for each itemn
-          console.log(price);
 
           // * I am trying to get into our order id and create a new item sending in the id of the item
           await axios.post(url + `orders/${order.data.id}/items`, {
@@ -112,9 +111,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+  useEffect(() => {}, [cart]);
 
   return (
     <div className="App">
@@ -135,6 +132,8 @@ function App() {
           handleOnCheckout={handleOnCheckout}
           order={order}
           setOrder={setOrder}
+          confirmed={confirmed}
+          setConfirmed={setConfirmed}
         />
         <main>
           <SubNavbar

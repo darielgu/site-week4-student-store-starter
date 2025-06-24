@@ -45,3 +45,21 @@
   border: solid 1px white;
   color: white;
 }
+.confirmed {
+  color: green;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.confirmed h1 {
+  color: rgb(255, 255, 255);
+}
+.confirmed button {
+  margin: 0 auto;
+  color: rgb(255, 255, 255);
+  width: 20%;
+  border-radius: 8px;
+  background-color: rgb(68, 149, 30);
+}

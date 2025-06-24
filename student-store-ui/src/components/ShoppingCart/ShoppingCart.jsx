@@ -122,6 +122,8 @@ export default function ShoppingCart({
   order,
   setOrder,
   error,
+  confirmed,
+  setConfirmed,
 }) {
   return (
     <div className="ShoppingCart">
@@ -129,11 +131,13 @@ export default function ShoppingCart({
         <div className="open">
           <CartItems products={products} cart={cart} />
           <PaymentInfo
+            confirmed={confirmed}
             userInfo={userInfo}
             setUserInfo={setUserInfo}
             handleOnCheckout={handleOnCheckout}
             isCheckingOut={isCheckingOut}
             error={error}
+            setConfirmed={setConfirmed}
           />
           <CheckoutSuccess
             userInfo={userInfo}

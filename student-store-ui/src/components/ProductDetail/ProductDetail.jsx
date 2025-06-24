@@ -4,12 +4,15 @@ import axios from "axios";
 import NotFound from "../NotFound/NotFound";
 import { formatPrice } from "../../utils/format";
 import "./ProductDetail.css";
+import { useNavigate } from "react-router-dom";
 
 function ProductDetail({ addToCart, removeFromCart, getQuantityOfItemInCart }) {
+  const navigate = useNavigate();
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
+  const [sendBack, setSendBack] = useState(false);
 
   //need a useEffect to pupulate individual product
   useEffect(() => {
@@ -55,6 +58,9 @@ function ProductDetail({ addToCart, removeFromCart, getQuantityOfItemInCart }) {
   return (
     <div className="ProductDetail">
       <div className="product-card">
+        <button name="close" onClick={() => navigate("/")}>
+          X
+        </button>
         <div className="media">
           <img
             src={product.image_url || "/placeholder.png"}
