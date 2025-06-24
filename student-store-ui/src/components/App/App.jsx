@@ -31,7 +31,7 @@ function App() {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [error, setError] = useState(null);
   const [order, setOrder] = useState(null);
-
+  const [confirmed, setConfirmed] = useState(false);
   // Axios Call to populate products
   useEffect(() => {
     async function getProducts() {
@@ -101,6 +101,11 @@ function App() {
         status: "completed",
       });
       setIsCheckingOut(false);
+      // TODO add something here to signal order is sent, and clear cart
+      // {confirmed ? <h1>Order SENT</h1> : <></>} <-- similar to this
+      setCart([]);
+
+      setConfirmed(true);
     } catch (error) {
       console.error(error);
       setIsCheckingOut(false);
@@ -138,6 +143,7 @@ function App() {
             searchInputValue={searchInputValue}
             handleOnSearchInputChange={handleOnSearchInputChange}
           />
+
           <Routes>
             <Route
               path="/"
