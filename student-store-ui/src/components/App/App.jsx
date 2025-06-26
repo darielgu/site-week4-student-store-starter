@@ -74,12 +74,11 @@ function App() {
 
       // for each loop starts here;
       await Promise.all(
-        // Was having a race condition
+        // Was having a race condition so I created a promise
         itemId_Quantity.map(async ([id, quantity]) => {
           // *  making another axios request here to grab the item price
-
           const response = await axios.get(url + `items/${id}`);
-          let price = response.data.price; // we should have the price here for each itemn
+          let price = response.data.price; // we should grab the price here for each itemn
 
           // * I am trying to get into our order id and create a new item sending in the id of the item
           await axios.post(url + `orders/${order.data.id}/items`, {
