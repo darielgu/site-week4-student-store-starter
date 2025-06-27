@@ -3,9 +3,6 @@
 Submitted by: **Dariel Gutierrez**
 
 Deployed Application (optional): [Student Store Deployed Site](ADD_LINK_HERE)
-ADDED THIS VIDEO FOR ENDPOINTS! LOOK AT MY CODE THEY ARE ALL THERE
-
-<div style="position: relative; padding-bottom: 64.55089820359281%; height: 0;"><iframe src="https://www.loom.com/embed/d0e89feba10f4726a48e2cddcdd281fa?sid=2dfb2245-aee1-47e8-aebd-8029d3427ab6" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ### Application Features
 
@@ -102,6 +99,9 @@ ADDED THIS VIDEO FOR ENDPOINTS! LOOK AT MY CODE THEY ARE ALL THERE
 
 <div style="position: relative; padding-bottom: 64.55089820359281%; height: 0;"><iframe src="https://www.loom.com/embed/14fe507f988643f48609cec49706ea63?sid=04b4bfa1-86c8-4a8d-9d22-601c6a15ce40" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
+SECOND VIDEO ADDED FOR ENDPOINTS / LOOK AT MY CODE
+
+<div style="position: relative; padding-bottom: 41.77083333333333%; height: 0;"><iframe src="https://www.loom.com/embed/cff2138f450d4217806bbb2dee5393cb?sid=794aa6ba-c070-460a-acb1-6b52ccadb4e7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 ### Reflection
 
 - Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
