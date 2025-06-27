@@ -3,6 +3,9 @@
 Submitted by: **Dariel Gutierrez**
 
 Deployed Application (optional): [Student Store Deployed Site](ADD_LINK_HERE)
+ADDED THIS VIDEO FOR ENDPOINTS! LOOK AT MY CODE THEY ARE ALL THERE
+
+<div style="position: relative; padding-bottom: 64.55089820359281%; height: 0;"><iframe src="https://www.loom.com/embed/d0e89feba10f4726a48e2cddcdd281fa?sid=2dfb2245-aee1-47e8-aebd-8029d3427ab6" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ### Application Features
 
